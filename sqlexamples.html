@@ -1,0 +1,101 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>SQL statement examples - Data Analyst Portfolio</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<a href="index.html" class="logo">Data Analyst Portfolio</a>
+					</header>
+
+				<!-- Nav -->
+					<nav id="nav">
+						<ul class="links">
+							<li><a href="index.html">Homepage</a></li>f
+							<li><a href="myskills.html">My skills</a></li>
+							<li class="active"><a href="sqlexamples.html">SQL examples</a></li> 
+							<li><a href="contactme.html">Contact</a></li>
+						</ul>
+						<ul class="icons">
+							<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+							<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+							<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+							<li><a href="#" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+						</ul>
+					</nav>
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Post -->
+							<section class="post">
+								<header class="major">
+									<h1>SQL statement examples</h1>
+									<p>Have a look at how great I am with SQL. Be amazed!</p>
+								</header>
+								<div class="image main"><img src="pics/covid.jpg" alt="" /></div>
+								<p>All examples on this page use data from <a href="http://worldindata.org/coronavirus" target="_blank">ourworldindata.org</a>, namely data in covid deaths and vaccinations.</p>
+								<p>Skills used: Joins, CTE's, Temp Tables, Windows Functions, Aggregate Functions, Creating Views, Converting Data Types</p>
+
+								<h2>Simple select</h2>
+								<p>First let's look on some simple statements:</p>
+									<pre><code>SELECT * FROM covidbase.tblcoviddeaths WHERE location like '%Ghana%';
+SELECT SUM(new_deaths) FROM covidbase.tblcoviddeaths WHERE location = 'Ghana';
+</code></pre>
+
+								<h2>Average life expectancy in Asia and Africa</h2>
+								<p>Not as simple one now:</p>
+									<pre><code>SELECT AVG(life_expectancy) as 'life expectancy', 
+  continent, location, MAX(date)
+FROM covidbase.tblcovidvaccinations
+where continent = 'asia' or continent = 'africa'
+group by continent, location
+order by continent, location;
+									</code></pre>
+
+								<h2> Total Cases vs Total Deaths</h2>
+								<p>Shows likelihood of dying if you contract covid in your country</p>
+
+								<pre><code>Select Location, date, total_cases,total_deaths, 
+(total_deaths/total_cases)*100 as DeathPercentage
+From covidbase.tblcoviddeaths
+Where location like '%states%'
+and continent is not null 
+order by 1,2;</code></pre>
+
+								<div class="image">Results of the statement:<img src="pics/data-grid2.jpg" alt="Data grid"></div>
+
+								</div>
+							
+							</section>
+
+					</div>
+
+
+				<!-- Copyright -->
+					<div id="copyright">
+						<ul><li>&copy; Data Analyst 2023</li></ul>
+					</div>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
