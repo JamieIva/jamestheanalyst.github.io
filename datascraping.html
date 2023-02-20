@@ -6,6 +6,8 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/default.min.css">
+
 	</head>
 	<body class="is-preload">
 
@@ -43,7 +45,7 @@
 									<h1>Web Scraping</h1>
 									<p>Scarping</p>
 								</header>
-								<div class="image main"><img src="pics/covid.jpg" alt="" /></div>
+								<div class="image main"><img src="" alt="" /></div>
 								<p>All examples on this page use data from <a href="http://worldindata.org/coronavirus" target="_blank">ourworldindata.org</a>, namely data in covid deaths and vaccinations.</p>
 								<p>Skills used: Joins, CTE's, Temp Tables, Windows Functions, Aggregate Functions, Creating Views, Converting Data Types</p>
 
@@ -135,6 +137,10 @@ except Exception as e:
 excel.save('Cineb Movies.xlsx')
 
 </code></pre>
+								<h2>Excel file</h2>
+								<p>The contents of the scraped document has been made into an excel file</p>
+								<iframe width="100%" height="400ps" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTOEagSJZGzCocgCmWraH5jMqExQM1vNw5urYfhBGm3e6Z7A92UMvV6Ca28J3d14Q/pubhtml"></iframe>
+
 
 								<h2>Average life expectancy in Asia and Africa</h2>
 								<p>Not as simple one now:</p>
@@ -180,6 +186,9 @@ order by 1,2;</code></pre>
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+			<script src="highlight.min.js"></script>
+			<script>hljs.highlightAll();</script>
+
 
 	</body>
 </html>
