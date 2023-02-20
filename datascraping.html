@@ -43,14 +43,14 @@
 							<section class="post">
 								<header class="major">
 									<h1>Web Scraping</h1>
-									<p>Scarping</p>
+									<p></p>
 								</header>
 								<div class="image main"><img src="" alt="" /></div>
-								<p>All examples on this page use data from <a href="http://worldindata.org/coronavirus" target="_blank">ourworldindata.org</a>, namely data in covid deaths and vaccinations.</p>
-								<p>Skills used: Joins, CTE's, Temp Tables, Windows Functions, Aggregate Functions, Creating Views, Converting Data Types</p>
+								<p>The data scraped are from this website <a href="http://worldindata.org/coronavirus" target="_blank">ourworldindata.org</a>, which I created a data set of movies and TV series.</p>
+								<p>As shown below, I have created an excel file with contents of said data in it.</p>
 
 								<h2>Python Code</h2>
-								<p>I scraped data from :</p>
+								<p></p>
 									<pre><code>
 
 from bs4 import BeautifulSoup
@@ -136,35 +136,56 @@ except Exception as e:
 
 excel.save('Cineb Movies.xlsx')
 
-</code></pre>
+									</code></pre>
 								<h2>Excel file</h2>
 								<p>The contents of the scraped document has been made into an excel file</p>
 								<iframe width="100%" height="400ps" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTOEagSJZGzCocgCmWraH5jMqExQM1vNw5urYfhBGm3e6Z7A92UMvV6Ca28J3d14Q/pubhtml"></iframe>
 
 
-								<h2>Average life expectancy in Asia and Africa</h2>
-								<p>Not as simple one now:</p>
-									<pre><code>SELECT AVG(life_expectancy) as 'life expectancy', 
-  continent, location, MAX(date)
-FROM covidbase.tblcovidvaccinations
-where continent = 'asia' or continent = 'africa'
-group by continent, location
-order by continent, location;
-									</code></pre>
-
-								<h2> Total Cases vs Total Deaths</h2>
-								<p>Shows likelihood of dying if you contract covid in your country</p>
-
-								<pre><code>Select Location, date, total_cases,total_deaths, 
-(total_deaths/total_cases)*100 as DeathPercentage
-From covidbase.tblcoviddeaths
-Where location like '%states%'
-and continent is not null 
-order by 1,2;</code></pre>
-
-								<div class="image">Results of the statement:<img src="pics/data-grid2.jpg" alt="Data grid"></div>
-
-								</div>
+								<h2>Python Code 2</h2>
+								<p>In this section we are looking at scraped data from <a href="https://www.timesjobs.com/candidate/job-search.html?searchType=personalizedSearch&from=submit&txtKeywords=Java+%2C+Python&txtLocation=" target="_blank">timejobs.com</a></p>. In this code, we are looking for jobs which require python skills and also the ability to exclude skills in which the user might not be proficient in. I have also set a timer in which, if there's case of new job posting python in them, it refreshes every hour and includes said jobs. 
+<pre><code>
+# in this code, I am trying to find job application with the serach of 'python' 
+from bs4 import BeautifulSoup
+import requests
+import time
+	
+# here I am trying to find skills that I am not familiar with so that i can rule them out
+print('Put some skill that you  not are familiar with')
+unfamliar_skill = input('>')
+print(f'Filtering out {unfamliar_skill}')
+	
+# In this segment, I am looking for jobs on this website 
+def find_jobs():
+	html_text = requests.get('https://www.timesjobs.com/candidate/job-search.html?searchType=personalizedSearch&from=submit&txtKeywords=Java+%2C+Python&txtLocation=').text
+	soup = BeautifulSoup(html_text, 'lxml')
+	jobs = soup.find_all('li', class_ = "clearfix job-bx wht-shd-bx")
+	
+	for job in jobs:
+		posted_date = job.find('span', class_ = 'sim-posted').span.text
+# in this portion of the code, I am trying to find job within a few days and not everything so the files i get back aren't too huge
+		if 'few' in posted_date:
+			company_name = job.find('h3', class_ = 'joblist-comp-name').text.replace(' ','') 
+			skills = job.find('span', class_ = 'srp-skills').text.replace(' ','') 
+			more_info = job.header.h2.a['href']
+# And here again I am trying to rule out skills I dont know from the job search           
+			if unfamliar_skill not in skills:
+				posted_date = job.find('span', class_ = 'sim-posted').span.text
+	
+				print(f"Company Name: {company_name.strip()}")
+				print(f"Required Skills: {skills.strip()}")
+				print(f"More Info: {more_info}") 
+	
+				print('')
+# the time i want this  program running 
+if __name__ == '__main__':
+	while True:
+		find_jobs()
+		time_wait = 10
+		print(f'waiting {time_wait} minutes...')
+		time.sleep(time_wait * 60)
+	
+</code></pre>
 							
 							</section>
 
