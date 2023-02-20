@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>James Mantey Data Analyst Portfolio</title>
+		<title>SQL statement examples - Data Analyst Portfolio</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -10,40 +10,25 @@
 	<body class="is-preload">
 
 		<!-- Wrapper -->
-			<div id="wrapper" class="fade-in">  
-
-				<!-- Intro -->
-					<div id="intro">
-						<h1>James Mantey <br>Data Analyst<br />
-						Portfolio</h1>
-						<p>Data ANalyst skiled in SQL, Python, Tableau, Excel and also a highly creative professional who thrives on innovation and problem-solving.
-							Demonstrated success in working independently as well as in team environments.
-							Excellent verbal and written communication skills.
-							 <br />
-							DM me on Twitter 
-							<a href="https://twitter.com/mflikejames" target="_blank">"@MFlikeJAMES"</a></p>
-						<ul class="actions">
-							<li><a href="#header" class="button icon solid solo fa-arrow-down scrolly">Continue</a></li>
-						</ul>
-					</div>
+			<div id="wrapper">
 
 				<!-- Header -->
 					<header id="header">
 						<a href="index.html" class="logo">Data Analyst Portfolio</a>
 					</header>
 
-				<!-- Nav -->`
+				<!-- Nav -->
 					<nav id="nav">
 						<ul class="links">
-							<li class="active"><a href="index.html">Homepage</a></li>
+							<li><a href="index.html">Homepage</a></li>
 							<li><a href="myskills.html">My skills</a></li>
-							<li><a href="sqlexamples.html">SQL examples</a></li>
-							<li><a href="datascraping.html">Data Scraping</a></li>
+							<li><a href="sqlexamples.html">SQL examples</a></li> 
+							<li class= "active"><a href="datascraping.html">Data Scraping</a></li>
 							<li><a href="contactme.html">Contact</a></li>
 						</ul>
 						<ul class="icons">
-							<li><a href="https://twitter.com/mflikejames" target="_blank" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-							<li><a href="https://www.facebook.com/blabla" target="_blank" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+							<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+							<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
 							<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
 							<li><a href="#" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
 						</ul>
@@ -52,72 +37,133 @@
 				<!-- Main -->
 					<div id="main">
 
-						<!-- Featured Post -->
-							<article class="post featured">
+						<!-- Post -->
+							<section class="post">
 								<header class="major">
-									<h2><a href="myskills.html">Cleaning the data in SQL</a></h2>
-									<p>In this project we clean housing data in SQL server and tranform it in the SQL server to make it more usable for analysis.</p>
+									<h1>Web Scraping</h1>
+									<p>Scarping</p>
 								</header>
-								<a href="myskills.html" class="image main"><img src="pics/data-analyst.png" alt="" /></a>
-								<ul class="actions special">
-									<li><a href="myskills.html" class="button large">Read more</a></li>
-								</ul>
-							</article>
+								<div class="image main"><img src="pics/covid.jpg" alt="" /></div>
+								<p>All examples on this page use data from <a href="http://worldindata.org/coronavirus" target="_blank">ourworldindata.org</a>, namely data in covid deaths and vaccinations.</p>
+								<p>Skills used: Joins, CTE's, Temp Tables, Windows Functions, Aggregate Functions, Creating Views, Converting Data Types</p>
 
-						<!-- Posts -->
-							<section class="posts">
-								<article>
-									<header>
-										<h2><a href="myskills.html">My skills</a></h2>
-									</header>
-									<a href="myskills.html" class="image fit"><img src="pics/data-analyst2.png" alt="" /></a>
-									<p>What projects I worked on....</p>
-									<ul class="actions special">
-										<li><a href="myskills.html" class="button">Read more</a></li>
-									</ul>
-								</article>
-								<article>
-									<header>
-										<h2><a href="sqlexamples.html">SQL statement examples</a></h2>
-									</header>
-									<a href="sqlexamples.html" class="image fit"><img src="pics/sql.jpg" alt="" /></a>
-									<p>Take a look at some examples of my work with data in MySQL database.</p>
-									<ul class="actions special">
-										<li><a href="sqlexamples.html" class="button">Read more</a></li>
-									</ul>
-								</article>
+								<h2>Python Code</h2>
+								<p>I scraped data from :</p>
+									<pre><code>
+
+from bs4 import BeautifulSoup
+import requests, openpyxl
+
+excel = openpyxl.Workbook()
+print(excel.sheetnames)
+sheet = excel.active
+sheet.title = 'Top Rated Movies on CSFD.cz'
+print(excel.sheetnames)
+sheet.append(['Section', 'Media Type', 'Media Title', 'Year of Release', 'Length', 'Quality', 'Season', 'Episode' ])
+
+try:
+    source = requests.get('https://cineb.net/')
+    source.raise_for_status
+
+    soup = BeautifulSoup(source.text, 'html.parser')
+
+    # first we want the movies in the featured
+    movies = soup.find('ul', class_="film-list-ul").find_all('li')
+    section = 'Featured'
+    mediatype = 'Movie'
+    episode = ''
+    season = ''
+    print('Section: ' + section)
+
+    for movie in movies:
+        name = movie.find('h3', class_="film-name").a.text
+        mytext = movie.find('div', class_="fd-infor").text
+        mysplit = mytext.split('\n')
+        quality = mysplit[1]
+        year = mysplit[2]
+        length = mysplit[4]
+        print('Movie: ' + name + "[" + quality + "] " + year + ' ' + length)
+        sheet.append([section, mediatype, name, year, length, quality, season, episode])
+
+    moviesCount = len(movies)
+    print(f'Featured movies: {moviesCount}')
+
+    # now we want the movies in the trending section
+    movies = soup.find(id="trending-movies").find_all('div', class_="flw-item")
+    section = 'Trending'
+    mediatype = 'Movie'
+    print('Section: ' + section)
+
+    for movie in movies:
+        name = movie.find('h3', class_="film-name").a.text
+        mytext = movie.find('div', class_="fd-infor").text
+        mysplit = mytext.split('\n')
+        quality = mysplit[1]
+        year = mysplit[2]
+        length = mysplit[4]
+        print('Movie: ' + name + "[" + quality + "] " + year + ' ' + length)
+        sheet.append([section, mediatype, name, year, length, quality, season, episode])
+
+    moviesCount = len(movies)
+    print(f'Trending movies: {moviesCount}')
+
+    # now we want the series in the trending section
+    movies = soup.find(id="trending-tv").find_all('div', class_="flw-item")
+    section = 'Trending'
+    mediatype = 'Series'
+    print('Section: ' + section)
+    year = ''
+    length = ''
+
+    for movie in movies:
+        name = movie.find('h3', class_="film-name").a.text
+        mytext = movie.find('div', class_="fd-infor").text
+        mysplit = mytext.split('\n')
+        quality = mysplit[1]
+        season = mysplit[2]
+        episode = mysplit[4]
+        print('Series: ' + name + "[" + quality + "] " + season + ' ' + episode)
+        sheet.append([section, mediatype, name, year, length, quality, season, episode])
+
+    moviesCount = len(movies)
+    print(f'Trending series: {moviesCount}')
+
+except Exception as e:
+    print(e)
+
+
+excel.save('Cineb Movies.xlsx')
+
+</code></pre>
+
+								<h2>Average life expectancy in Asia and Africa</h2>
+								<p>Not as simple one now:</p>
+									<pre><code>SELECT AVG(life_expectancy) as 'life expectancy', 
+  continent, location, MAX(date)
+FROM covidbase.tblcovidvaccinations
+where continent = 'asia' or continent = 'africa'
+group by continent, location
+order by continent, location;
+									</code></pre>
+
+								<h2> Total Cases vs Total Deaths</h2>
+								<p>Shows likelihood of dying if you contract covid in your country</p>
+
+								<pre><code>Select Location, date, total_cases,total_deaths, 
+(total_deaths/total_cases)*100 as DeathPercentage
+From covidbase.tblcoviddeaths
+Where location like '%states%'
+and continent is not null 
+order by 1,2;</code></pre>
+
+								<div class="image">Results of the statement:<img src="pics/data-grid2.jpg" alt="Data grid"></div>
+
+								</div>
+							
 							</section>
 
 					</div>
 
-				<!-- Footer -->
-					<footer id="footer">
-						</section>
-						<section class="split contact">
-							<section class="alt">
-								<h3>Address</h3>
-								<p>1234 Somewhere Road #87257<br />
-								Nashville, TN 00000-0000</p>
-							</section>
-							<section>
-								<h3>Phone</h3>
-								<p><a href="#">(000) 000-0000</a></p>
-							</section>
-							<section>
-								<h3>Email</h3>
-								<p><a href="#">info@untitled.tld</a></p>
-							</section>
-							<section>
-								<h3>Social</h3>
-								<ul class="icons alt">
-									<li><a href="#" class="icon brands alt fa-twitter"><span class="label">Twitter</span></a></li>
-									<li><a href="#" class="icon brands alt fa-facebook-f"><span class="label">Facebook</span></a></li>
-									<li><a href="#" class="icon brands alt fa-instagram"><span class="label">Instagram</span></a></li>
-									<li><a href="#" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
-								</ul>
-							</section>
-						</section>
-					</footer>
 
 				<!-- Copyright -->
 					<div id="copyright">
