@@ -1,13 +1,14 @@
+
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>SQL statement examples - Data Analyst Portfolio</title>
+		<title>Data scraping - Data Analyst Portfolio</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<link rel=”stylesheet” href=”default.min.css” />
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/default.min.css">
-
 	</head>
 	<body class="is-preload">
 
@@ -23,9 +24,9 @@
 					<nav id="nav">
 						<ul class="links">
 							<li><a href="index.html">Homepage</a></li>
-							<li><a href="myskills.html">My skills</a></li>
-							<li><a href="sqlexamples.html">SQL examples</a></li> 
-							<li class= "active"><a href="datascraping.html">Data Scraping</a></li>
+							<li><a href="inflation.html">Inflation project</a></li>
+							<li class="active"><a href="datascraping.html">Data scraping</a></li>
+							<li><a href="datacleaning.html">Data cleaning</a></li>
 							<li><a href="contactme.html">Contact</a></li>
 						</ul>
 						<ul class="icons">
@@ -42,20 +43,18 @@
 						<!-- Post -->
 							<section class="post">
 								<header class="major">
-									<h1>Web Scraping</h1>
-									<p></p>
+									<h1>Data scraping</h1>
 								</header>
-								<div class="image main"><img src="" alt="" /></div>
-								<p>The data scraped are from this website <a href="http://worldindata.org/coronavirus" target="_blank">ourworldindata.org</a>, which I created a data set of movies and TV series.</p>
+
+								<h2>Cineb.net scraping</h2>
+								<p>The data scraped in this section are from the website cineb.net, from which I created a data set of movies and TV series.</p>
 								<p>As shown below, I have created an excel file with contents of said data in it.</p>
 
-								<h2>Python Code</h2>
-								<p></p>
-									<pre><code>
+								<h3>Python code</h3>
 
-from bs4 import BeautifulSoup
+								<pre><code class="language-python">from bs4 import BeautifulSoup
 import requests, openpyxl
-
+									
 excel = openpyxl.Workbook()
 print(excel.sheetnames)
 sheet = excel.active
@@ -135,16 +134,22 @@ except Exception as e:
 
 
 excel.save('Cineb Movies.xlsx')
+</code></pre>
 
-									</code></pre>
-								<h2>Excel file</h2>
-								<p>The contents of the scraped document has been made into an excel file</p>
-								<iframe width="100%" height="400ps" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTOEagSJZGzCocgCmWraH5jMqExQM1vNw5urYfhBGm3e6Z7A92UMvV6Ca28J3d14Q/pubhtml"></iframe>
+								<h3>Excel file</h3>
+								<p>This is the contents of the Excel file with the scraped data:</p>
+								<iframe width="100%" height="400px" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSkJBJZGx9xTJKzGKre8Bj8Gt0XCQGRHO2YAilamw6OmIKE7FvMbdPLhZIJaR00PQ/pubhtml?widget=true&amp;headers=false"></iframe>
 
+								<hr />
 
-								<h2>Python Code 2</h2>
-								<p>In this section we are looking at scraped data from <a href="https://www.timesjobs.com/candidate/job-search.html?searchType=personalizedSearch&from=submit&txtKeywords=Java+%2C+Python&txtLocation=" target="_blank">timejobs.com</a></p>. In this code, we are looking for jobs which require python skills and also the ability to exclude skills in which the user might not be proficient in. I have also set a timer in which, if there's case of new job posting python in them, it refreshes every hour and includes said jobs. 
-<pre><code>
+								<h2>Timejobs.com scraping</h2>
+
+								<p>In this section we are looking at scraped data from <a href="https://www.timesjobs.com/candidate/job-search.html?searchType=personalizedSearch&from=submit&txtKeywords=Java+%2C+Python&txtLocation=" target="_blank">timejobs.com</a></p>
+								<p>In this code, we are looking for jobs which require python skills and also the ability to exclude skills in which the user might not be proficient in. I have also set a timer in which, if there's case of new job posting python in them, it refreshes every hour and includes said jobs.</p>
+								
+								<h3>Python code</h3>
+
+								<pre><code>
 # in this code, I am trying to find job application with the serach of 'python' 
 from bs4 import BeautifulSoup
 import requests
@@ -186,6 +191,11 @@ if __name__ == '__main__':
 		time.sleep(time_wait * 60)
 	
 </code></pre>
+
+<div class="image" style="margin-bottom: 2em;">Results of running the code:<img class="image fit" src="pics/scraper2b.png" alt="Data grid"></div>
+
+
+								</div>
 							
 							</section>
 
@@ -209,7 +219,5 @@ if __name__ == '__main__':
 			<script src="assets/js/main.js"></script>
 			<script src="highlight.min.js"></script>
 			<script>hljs.highlightAll();</script>
-
-
 	</body>
 </html>

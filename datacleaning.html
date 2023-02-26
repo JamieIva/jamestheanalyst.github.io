@@ -1,11 +1,13 @@
+
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>SQL statement examples - Data Analyst Portfolio</title>
+		<title>Data cleaning - Data Analyst Portfolio</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/default.min.css">
 	</head>
 	<body class="is-preload">
 
@@ -21,9 +23,9 @@
 					<nav id="nav">
 						<ul class="links">
 							<li><a href="index.html">Homepage</a></li>
-							<li><a href="myskills.html">My skills</a></li>
-							<li class="active"><a href="sqlexamples.html">SQL examples</a></li> 
-							<li><a href="datascraping.html">Data Scraping</a></li>
+							<li><a href="inflation.html">Inflation project</a></li>
+							<li><a href="datascraping.html">Data scraping</a></li>
+							<li class="active"><a href="datacleaning.html">Data cleaning</a></li>
 							<li><a href="contactme.html">Contact</a></li>
 						</ul>
 						<ul class="icons">
@@ -40,18 +42,14 @@
 						<!-- Post -->
 							<section class="post">
 								<header class="major">
-									<h1>SQL statement examples</h1>
-									<p>Have a look at how great I am with SQL. Be amazed!</p>
+									<h1>Data cleaning</h1>
+									<p>All examples on this page use data from the website <a href="https://ourworldindata.org" target="_blank">ourworldindata.org</a>, namely data on covid deaths and vaccinations.</p>
 								</header>
-								<div class="image main"><img src="pics/covid.jpg" alt="" /></div>
-								<p>All examples on this page use data from <a href="http://worldindata.org/coronavirus" target="_blank">ourworldindata.org</a>, namely data in covid deaths and vaccinations.</p>
-								<p>Skills used: Joins, CTE's, Temp Tables, Windows Functions, Aggregate Functions, Creating Views, Converting Data Types</p>
+								<p>SQL skills used: Joins, CTE's, Temp Tables, Windows Functions, Aggregate Functions, Creating Views, Converting Data Types</p>
 
 								<h2>Simple select</h2>
-								<p>First let's look on some simple statements boobies i love:</p>
-									<pre><code>SELECT * FROM covidbase.tblcoviddeaths WHERE location like '%Ghana%';
-SELECT SUM(new_deaths) FROM covidbase.tblcoviddeaths WHERE location = 'Ghana';
-</code></pre>
+								<p>First let's look on some simple statements:</p>
+
 
 								<h2>Average life expectancy in Asia and Africa</h2>
 								<p>Not as simple one now:</p>
@@ -73,7 +71,19 @@ Where location like '%states%'
 and continent is not null 
 order by 1,2;</code></pre>
 
-								<div class="image">Results of the statement:<img src="pics/data-grid2.jpg" alt="Data grid"></div>
+								<div class="image" style="margin-bottom: 2em;">Results of the statement:<img src="pics/data-grid2.jpg" alt="Data grid"></div>
+
+								<h2>BREAKING THINGS DOWN BY CONTINENT</h2>
+
+								<p>Showing contintents with the highest death count per population:</p>
+
+								<pre><code>SELECT continent, MAX(total_deaths) as TotalDeathCount
+FROM covidbase.tblcoviddeaths
+WHERE continent is not null 
+GROUP BY continent
+ORDER BY TotalDeathCount desc;</code></pre>
+
+<div class="image" style="margin-bottom: 2em;">Results of the statement:<img src="pics/data-grid3.jpg" alt="Data grid"></div>
 
 								</div>
 							
@@ -97,6 +107,7 @@ order by 1,2;</code></pre>
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
-
+			<script src="highlight.min.js"></script>
+			<script>hljs.highlightAll();</script>
 	</body>
 </html>
