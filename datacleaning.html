@@ -51,14 +51,13 @@
 								<p>First let's look on some simple statements:</p>
 
 
-								<h2>Average life expectancy in Asia and Africa</h2>
-								<p>Not as simple one now:</p>
-									<pre><code>SELECT AVG(life_expectancy) as 'life expectancy', 
-  continent, location, MAX(date)
-FROM covidbase.tblcovidvaccinations
-where continent = 'asia' or continent = 'africa'
-group by continent, location
-order by continent, location;
+								<h2>CHECKING THE SUM OF INFLATION IN EACH YEAR FROM 2017 TO 2022</h2>
+								<p></p>
+									<pre><code>SELECT SUM(Y2017) AS totalY2017, SUM(Y2018) AS totalY2018, SUM(Y2019) AS totalY2019, SUM(Y2020) AS totalY2020, SUM(Y2021) AS totalY2021, SUM(Y2022) AS totalY2022
+FROM portfolio_project.global_inflation
+WHERE Country IS NOT NULL
+GROUP BY country
+ORDER BY country ASC;
 									</code></pre>
 
 								<h2> Total Cases vs Total Deaths</h2>
