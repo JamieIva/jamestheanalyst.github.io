@@ -60,29 +60,28 @@ GROUP BY country
 ORDER BY country ASC;
 									</code></pre>
 
-								<h2> Total Cases vs Total Deaths</h2>
-								<p>Shows likelihood of dying if you contract covid in your country</p>
+								<h2> AVERAGE INFLATION RATES FROM 2017 AND 2022</h2>
+								<p>Shows likelihood of increasing inflation</p>
 
-								<pre><code>Select Location, date, total_cases,total_deaths, 
-(total_deaths/total_cases)*100 as DeathPercentage
-From covidbase.tblcoviddeaths
-Where location like '%states%'
-and continent is not null 
-order by 1,2;</code></pre>
+								<pre><code>SELECT country, AVG(Y2017) AS AvgInflationPercentage2017, AVG(Y2022) AS AvgInflationrate2022
+FROM portfolio_project.global_inflation
+WHERE Y2022 IS NOT NULL
+GROUP BY Country
+ORDER BY 2 DESC
+LIMIT 20;</code></pre>
 
-								<div class="image" style="margin-bottom: 2em;">Results of the statement:<img src="pics/data-grid2.jpg" alt="Data grid"></div>
+								<div class="image" style="margin-bottom: 2em;">Results of the statement:<img src="pics/sql.png" alt="Data grid"></div>
 
-								<h2>BREAKING THINGS DOWN BY CONTINENT</h2>
+								<h2>sum of inflation in 2022</h2>
 
-								<p>Showing contintents with the highest death count per population:</p>
+								<p></p>
 
-								<pre><code>SELECT continent, MAX(total_deaths) as TotalDeathCount
-FROM covidbase.tblcoviddeaths
-WHERE continent is not null 
-GROUP BY continent
-ORDER BY TotalDeathCount desc;</code></pre>
+								<pre><code>SELECT country, SUM(Y2022) AS TOTALY2022
+FROM portfolio_project.global_inflation
+GROUP BY Country
+ORDER BY TOTALY2022;</code></pre>
 
-<div class="image" style="margin-bottom: 2em;">Results of the statement:<img src="pics/data-grid3.jpg" alt="Data grid"></div>
+<div class="image" style="margin-bottom: 2em;">Results of the statement:<img src="pics/sql1.png" alt="Data grid"></div>
 
 
 								<pre><code>
