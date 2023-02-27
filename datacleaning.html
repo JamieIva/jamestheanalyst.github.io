@@ -84,9 +84,133 @@ ORDER BY TotalDeathCount desc;</code></pre>
 
 <div class="image" style="margin-bottom: 2em;">Results of the statement:<img src="pics/data-grid3.jpg" alt="Data grid"></div>
 
+
+								<pre><code>
+	-- CHECHING THE AVERAGE INFLATION RATE  OF EACH YEAR
+
+	-- COMMAND ----------
+	SELECT country, AVG(Y2017) as AverageInfaltion2017
+	FROM portfolio_project.global_inflation
+	WHERE Country IS NOT NULL
+	GROUP BY country
+	ORDER BY country ASC;
+	-- COMMAND ----------
+	SELECT country, AVG(Y2018) as AverageInfaltion2018
+	FROM portfolio_project.global_inflation
+	WHERE Country IS NOT NULL
+	GROUP BY country
+	ORDER BY country ASC;
+	-- COMMAND ----------
+	SELECT country, AVG(Y2019) as AverageInfaltion019
+	FROM portfolio_project.global_inflation
+	WHERE Country IS NOT NULL
+	GROUP BY country
+	ORDER BY country ASC;
+	-- COMAND -----------
+	SELECT country, AVG(Y2020) as AverageInfaltion2020
+	FROM portfolio_project.global_inflation
+	WHERE Country IS NOT NULL
+	GROUP BY country
+	ORDER BY country ASC;
+	-- COMMAND ----------
+	SELECT country, AVG(Y2021) as AverageInfaltion2021
+	FROM portfolio_project.global_inflation
+	WHERE Country IS NOT NULL
+	GROUP BY country
+	ORDER BY country ASC;
+	-- COMMAND ----------
+	SELECT country, AVG(Y2022) as AverageInfaltion2022
+	FROM portfolio_project.global_inflation
+	WHERE Country IS NOT NULL
+	GROUP BY country
+	ORDER BY country ASC;
+	
+	-- COMPARING AVERAGE GDP OF 2021 TO 2022
+	
+	-- CHECKING THE SUM OF INFLATION IN EACH YEAR FROM 2017 TO 2022
+	-- COMMAND ----------
+	
+	SELECT country, SUM(Y2017) AS TotalY2017, SUM(Y2018) AS TotalY2018, SUM(Y2019) AS TotalY2019
+	FROM portfolio_project.global_inflation
+	WHERE Country IS NOT NULL
+	GROUP BY country
+	ORDER BY country ASC;
+	
+	-- COMMAND ----------
+	
+	SELECT country, SUM(Y2021) AS Y2021, SUM(Y2022) AS Y2022
+	FROM portfolio_project.global_inflation
+	WHERE Country IS NOT NULL
+	GROUP BY country
+	ORDER BY country ASC;
+	
+	-- COMMAND ----------
+	-- THIS SECTION WE'RE TRYING TO FIND THE COUNRTIES WITH THE HIGHEST INFLATION IN WESTERN COUNTRIES
+	SELECT country, SUM(Y2017) AS TotalY2017
+	FROM portfolio_project.global_inflation
+	WHERE country IN ('china', 'United States','Japan', 'Germany','United Kingdom', 'france', 'Italy', 'South Korea', 'Canada')
+	GROUP BY country
+	ORDER BY TotalY2017 DESC;
+	-- COMMAND ---------
+	SELECT country, SUM(Y2022) AS TotalY2022
+	FROM portfolio_project.global_inflation
+	WHERE country IN ('china', 'United States','Japan', 'Germany','United Kingdom', 'france', 'Italy', 'South Korea', 'Canada')
+	GROUP BY country
+	ORDER BY TotalY2022 DESC;
+	
+	-- COMMAND ----------
+	
+	SELECT country, SUM(Y2017/Y2022)*100 AS TotalPercentage2017to2022
+	FROM portfolio_project.global_inflation
+	WHERE country IN  ('china', 'United States','Japan', 'Germany','United Kingdom', 'france', 'Italy', 'South Korea', 'Canada') 
+	GROUP BY country
+	ORDER BY TotalPercentage2017to2022 desc;
+	
+	-- COMMAND ----------
+	
+	SELECT country, MAX(Y2017) AS max_Y2017
+	FROM portfolio_project.global_inflation
+	WHERE country IN  ('china', 'United States','Japan', 'Germany','United Kingdom', 'france', 'Italy', 'South Korea', 'Canada')
+	GROUP BY country
+	ORDER BY max_Y2017 desc;
+	
+	-- COMMAND ----------
+	
+	SELECT country, MAX(Y2018) AS max_Y2018
+	FROM portfolio_project.global_inflation
+	WHERE country IN  ('china', 'United States','Japan', 'Germany','United Kingdom', 'france', 'Italy', 'South Korea', 'Canada')
+	GROUP BY country
+	ORDER BY max_Y2018 desc;
+	
+	-- COMMAND ----------
+	
+	SELECT country, MAX(Y2019) AS max_Y2019
+	FROM portfolio_project.world_population
+	WHERE country IN  ('china', 'United States','Japan', 'Germany','United Kingdom', 'france', 'Italy', 'South Korea', 'Canada')
+	GROUP BY country
+	ORDER BY max_Y2019 desc;
+	
+	-- COMMAND ----------
+	
+	SELECT country, MAX(Y2020) AS max_2020
+	FROM portfolio_project.global_inflation
+	WHERE country IN ('Iraq','Afghanistan','Poland','Canada','Morocco','Saudi Arabia','Ukraine','Angola','Uzbekistan','Yemen','Peru','Malaysia','Ghana','Mozambique','Nepal','Madagascar','Ivory Coast','Venezuela','Cameroon')
+	GROUP BY country
+	ORDER BY max_pop1980 desc
+	LIMIT 20;
+	
+	-- COMMAND ----------
+	
+	SELECT country, MAX(Y2021) AS max_2021
+	FROM portfolio_project.global_inflation
+	WHERE country IN ('china', 'United States','Japan', 'Germany','United Kingdom', 'france', 'Italy', 'South Korea', 'Canada')
+	GROUP BY country
+	ORDER BY max_2021 desc;
+								</code></pre>
+								
 								</div>
 							
-							</section>
+								n>
 
 					</div>
 
