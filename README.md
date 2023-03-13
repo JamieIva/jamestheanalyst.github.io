@@ -1,12 +1,3 @@
-<h2>WHO AM I</h2>
-<ul>
-    <li>first nane: James</li>
-    <li>last name: Mantey</li>
-    <li>email:jamesanderswes@gmail.com</li>
-
-</h2>
-
-
 <h2>I AM INTERESTED ABOUT THE POSITION(S)</h2>
 <ol>
     <li>Data Analyst/Engineer</li>
