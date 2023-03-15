@@ -44,8 +44,8 @@
 									<p>All examples on this page use data from the website <a href="https://ourworldindata.org" target="_blank">ourworldindata.org</a></p>
 								</header>
 
-
-								<h2>CHECKING THE SUM OF INFLATION IN EACH YEAR FROM 2017 TO 2022</h2>
+								<h2>inflation project</h2>
+								<h4>CHECKING THE SUM OF INFLATION IN EACH YEAR FROM 2017 TO 2022</h4>
 								<p></p>
 									<pre><code>SELECT SUM(Y2017) AS totalY2017, SUM(Y2018) AS totalY2018, SUM(Y2019) AS totalY2019, SUM(Y2020) AS totalY2020, SUM(Y2021) AS totalY2021, SUM(Y2022) AS totalY2022
 FROM portfolio_project.global_inflation
@@ -54,7 +54,7 @@ GROUP BY country
 ORDER BY country ASC;
 									</code></pre>
 
-								<h2> AVERAGE INFLATION RATES FROM 2017 AND 2022</h2>
+								<h4> AVERAGE INFLATION RATES FROM 2017 AND 2022</h4>
 								<p>Shows likelihood of increasing inflation</p>
 
 								<pre><code>SELECT country, AVG(Y2017) AS AvgInflationPercentage2017, AVG(Y2022) AS AvgInflationrate2022
@@ -66,7 +66,7 @@ LIMIT 20;</code></pre>
 
 								<div class="image" style="margin-bottom: 2em;">Results of the statement:<img src="pics/sql.png" alt="Data grid"></div>
 
-								<h2>sum of inflation in 2022</h2>
+								<h4>sum of inflation in 2022</h4>
 
 								<p></p>
 
@@ -199,6 +199,174 @@ ORDER BY TOTALY2022;</code></pre>
 	WHERE country IN ('china', 'United States','Japan', 'Germany','United Kingdom', 'france', 'Italy', 'South Korea', 'Canada')
 	GROUP BY country
 	ORDER BY max_2021 desc;
+								</code></pre>
+
+								<h2>University Project</h2>
+
+								<pre><code>
+	SELECT * FROM portfolio_project.collegeliving;
+	SELECT COUNT(*)
+	FROM portfolio_project.collegeliving
+	WHERE state = 'alabama';
+	
+	SELECT Type, State, expense, year, MAX(value) AS tuitionfees
+	FROM portfolio_project.COllegeliving
+	WHERE expense like '%tuition%'
+	AND type like '%private%'
+	GROUP BY state, state, expense, type, year
+	ORDER BY year;
+	
+	SELECT year, value, type
+	FROM portfolio_project.collegeliving
+	WHERE type like '%private%';
+	
+	SELECT COUNT(*)
+	FROM portfolio_project.collegeliving
+	WHERE state = 'alaska';
+	
+	SELECT COUNT(*)
+	FROM portfolio_project.collegeliving
+	WHERE state = 'alabama';
+	
+	SELECT Type, State, expense, SUM(value) as totalfees
+	FROM portfolio_project.COllegeliving
+	WHERE state IN  ('nebraska', 'utah','virginia', 'wyoming','california', 'arkansas', 'florida', 'georgia', 'kansas', 'alabama') 
+	and year = '2014'
+	GROUP BY state, state, expense, type
+	ORDER BY totalfees;
+	
+	SELECT Type, State, expense, SUM(value) as totalfees
+	FROM portfolio_project.COllegeliving
+	WHERE state IN  ('nebraska', 'utah','virginia', 'wyoming','california', 'arkansas', 'florida', 'georgia', 'kansas') 
+	and year = '2015'
+	GROUP BY state, state, expense, type
+	ORDER BY totalfees;
+	
+	SELECT Type, State, expense, SUM(value) as totalfees
+	FROM portfolio_project.COllegeliving
+	WHERE state IN  ('nebraska', 'utah','virginia', 'wyoming','california', 'arkansas', 'florida', 'georgia', 'kansas') 
+	and year = '2016'
+	GROUP BY state, state, expense, type
+	ORDER BY totalfees;
+	
+	SELECT Type, State, expense, SUM(value) as totalfees
+	FROM portfolio_project.COllegeliving
+	WHERE state IN  ('nebraska', 'utah','virginia', 'wyoming','california', 'arkansas', 'florida', 'georgia', 'kansas') 
+	and year = '2017'
+	GROUP BY state, state, expense, type
+	ORDER BY totalfees;
+	
+	SELECT Type, State, expense, SUM(value) as totalfees
+	FROM portfolio_project.COllegeliving
+	WHERE state IN  ('nebraska', 'utah','virginia', 'wyoming','california', 'arkansas', 'florida', 'georgia', 'kansas') 
+	and year = '2018'
+	GROUP BY state, state, expense, type
+	ORDER BY totalfees;
+	
+	SELECT Type, State, expense, SUM(value) as totalfees
+	FROM portfolio_project.COllegeliving
+	WHERE state IN  ('nebraska', 'utah','virginia', 'wyoming','california', 'arkansas', 'florida', 'georgia', 'kansas') 
+	and year = '2019'
+	GROUP BY state, state, expense, type
+	ORDER BY totalfees;
+	
+	SELECT Type, State, expense, SUM(value) as totalfees
+	FROM portfolio_project.COllegeliving
+	WHERE state IN  ('nebraska', 'utah','virginia', 'wyoming','california', 'arkansas', 'florida', 'georgia', 'kansas') 
+	and year = '2020'
+	GROUP BY state, state, expense, type
+	ORDER BY totalfees;
+	
+	SELECT Type, State, expense, SUM(value) as totalfees
+	FROM portfolio_project.COllegeliving
+	WHERE state IN  ('nebraska', 'utah','virginia', 'wyoming','california', 'arkansas', 'florida', 'georgia', 'kansas') 
+	and year = '2021'
+	GROUP BY state, state, expense, type
+	ORDER BY totalfees;
+	
+	
+	
+	SELECT SUM(value)
+	FROM portfolio_project.collegeliving;
+	
+	SELECT AVG(value) Average_Tuition
+	FROM portfolio_project.collegeliving;
+	
+	SELECT AVG(value) AS AVG_public
+	FROM portfolio_project.collegeliving
+	WHERE expense like '%public%'
+	order by AVG_public;
+	
+	SELECT Type, State, expense, MAX(value) AS MAXfees
+	FROM portfolio_project.COllegeliving
+	WHERE expense like '%tuition%'
+	GROUP BY state, state, expense, type
+	ORDER BY MAXfees;
+	
+	SELECT year, Type, State, expense, MAX(value) AS MAXfees
+	FROM portfolio_project.COllegeliving
+	WHERE expense like '%tuition%'
+	GROUP BY state, state, expense, type
+	ORDER BY MAXfees;
+	
+	-- AVG INCREASE IN TUITION FROM 2014 TO 2021
+	
+	SELECT Type, State, expense, AVG(value) as avg_tuition2014
+	FROM portfolio_project.COllegeliving
+	WHERE state IN  ('nebraska', 'utah','virginia', 'wyoming','california', 'arkansas', 'florida', 'georgia', 'kansas') 
+	AND year = '2014' 
+	AND expense like '%tuition%' 
+	GROUP BY state, state, expense, type
+	ORDER BY avg_tuition2014;
+	
+	SELECT Type, State, expense, AVG(value) as avg_tuition2021
+	FROM portfolio_project.COllegeliving
+	WHERE state IN  ('nebraska', 'utah','virginia', 'wyoming','california', 'arkansas', 'florida', 'georgia', 'kansas') 
+	AND year = '2021' 
+	AND expense like '%tuition%' 
+	GROUP BY state, state, expense, type
+	ORDER BY avg_tuition2021;
+	
+	-- AVG INCREASE WITH ROOM AND BOAORD FROM 2014 TO 2021
+	
+	SELECT Type, State, expense, AVG(value) as room_expense
+	FROM portfolio_project.COllegeliving
+	WHERE state IN  ('nebraska', 'utah','virginia', 'wyoming','california', 'arkansas', 'florida', 'georgia', 'kansas') 
+	AND year = '2014' 
+	AND expense like '%room%' 
+	GROUP BY state, state, expense, type
+	ORDER BY room_expense;
+	
+	SELECT Type, State, expense, AVG(value) as room_fees
+	FROM portfolio_project.COllegeliving
+	WHERE state IN  ('nebraska', 'utah','virginia', 'wyoming','california', 'arkansas', 'florida', 'georgia', 'kansas') 
+	AND year = '2021' 
+	AND expense like '%room%' 
+	GROUP BY state, state, expense, type
+	ORDER BY room_fees;
+	
+	-- TUITION BETWENN PRIVATE SCHOOLS AND PUBLILC  IN 2021
+	
+	SELECT Type, State, expense, SUM(value) as private_tuition
+	FROM portfolio_project.COllegeliving
+	WHERE state NOT IN  ('nebraska', 'utah','virginia', 'wyoming','california', 'arkansas', 'florida', 'georgia', 'kansas') 
+	AND year = '2021' 
+	AND type like '%private%' 
+	AND expense like '%tuition%'
+	GROUP BY state, state, expense, type
+	ORDER BY private_tuition 
+	LIMIT 20;
+	
+	SELECT Type, State, expense, SUM(value) as public_tuition
+	FROM portfolio_project.COllegeliving
+	WHERE state NOT IN  ('nebraska', 'utah','virginia', 'wyoming','california', 'arkansas', 'florida', 'georgia', 'kansas') 
+	AND year = '2021' 
+	AND type like '%public%' 
+	AND expense like '%tuition%'
+	GROUP BY state, state, expense, type
+	ORDER BY public_tuition 
+	LIMIT 20;
+
 								</code></pre>
 								
 								</div>
